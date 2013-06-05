@@ -1,3 +1,14 @@
+*:before {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+.clearfix:after {
+    content: " ";
+    display: table;
+}
 .bk-list {
 	list-style: none;
 	position: relative;
@@ -13,8 +24,8 @@
 
 .bk-list li {
 	position: relative;
-	width: 40px;
-	height: 400px;
+	width: 40px;/*宽度*/
+	height: 300px;
 	float: left;
 	z-index: 1;
 	margin: 0px 0px 0px 1px;
@@ -31,7 +42,7 @@
 	cursor: pointer;
 	position: absolute;
 	width: 100%;
-	height: 400px;
+	height: 300px;
 	-webkit-transform-style: preserve-3d;
 	-moz-transform-style: preserve-3d;
 	transform-style: preserve-3d;
@@ -85,7 +96,7 @@
 	transform: translate3d(0,0,19px);
 	display: none;
 	width: 295px;
-	height: 390px;
+	height: 250px;/*白页的高度*/
 	top: 5px;
 	-webkit-backface-visibility: hidden;
 	-moz-backface-visibility: hidden;
@@ -96,7 +107,7 @@
 .bk-list li .bk-back,
 .bk-list li .bk-front > div {
 	width: 300px;
-	height: 400px;
+	height: 250px;/*不是封面的gaodu*/
 }
 
 .bk-list li .bk-left,
@@ -127,7 +138,7 @@
 }
 
 .bk-list li .bk-right {
-	height: 390px;
+	height: 290px;
 	top: 5px;
 	-webkit-transform: rotate3d(0,1,0,90deg) translate3d(0,0,295px);
 	-moz-transform: rotate3d(0,1,0,90deg) translate3d(0,0,295px);
@@ -138,7 +149,7 @@
 }
 
 .bk-list li .bk-left {
-	height: 400px;
+	height: 250px;/*gaodu*/
 	-webkit-transform: rotate3d(0,1,0,-90deg);
 	-moz-transform: rotate3d(0,1,0,-90deg);
 	transform: rotate3d(0,1,0,-90deg);
@@ -303,7 +314,7 @@
 .book-1 .bk-back,
 .book-1 .bk-left,
 .book-1 .bk-front:after {
-	background-color: #ff924a;
+	background-color:#cfa6ef;/*颜色*/
 }
 
 .book-1 .bk-cover {
@@ -366,7 +377,7 @@
 .book-2 .bk-back,
 .book-2 .bk-left,
 .book-2 .bk-front:after {
-	background-color: #222;
+	background-color: #FFC2CE;
 }
 
 .book-2 .bk-cover {
@@ -453,7 +464,7 @@
 .book-3 .bk-back,
 .book-3 .bk-left,
 .book-3 .bk-front:after {
-	background-color: #a4c19e;
+	background-color: #cfa6ef;
 }
 
 .book-3 .bk-cover {
@@ -517,21 +528,21 @@
 .bk-list li:nth-child(4) .bk-book .bk-back,
 .bk-list li:nth-child(4) .bk-book .bk-left,
 .bk-list li:nth-child(4) .bk-book .bk-front:after {
-	background-color: #cfa6ef;
+	background-color: #FFC2CE;
 }
 
 .bk-list li:nth-child(5) .bk-book .bk-front > div,
 .bk-list li:nth-child(5) .bk-book .bk-back,
 .bk-list li:nth-child(5) .bk-book .bk-left,
 .bk-list li:nth-child(5) .bk-book .bk-front:after {
-	background-color: #FFC2CE;
+	background-color: #ff924a;
 }
 
 .bk-list li:nth-child(6) .bk-book .bk-front > div,
 .bk-list li:nth-child(6) .bk-book .bk-back,
 .bk-list li:nth-child(6) .bk-book .bk-left,
 .bk-list li:nth-child(6) .bk-book .bk-front:after {
-	background-color: #80B3FF;
+	background-color: #FFC2CE;
 }
 
 .bk-list li:nth-child(7) .bk-book .bk-front > div,
@@ -545,7 +556,7 @@
 .bk-list li:nth-child(8) .bk-book .bk-back,
 .bk-list li:nth-child(8) .bk-book .bk-left,
 .bk-list li:nth-child(8) .bk-book .bk-front:after {
-	background-color: #A2122F;
+	background-color: #cfa6ef;
 }
 
 .bk-list li:nth-child(9) .bk-book .bk-front > div,
