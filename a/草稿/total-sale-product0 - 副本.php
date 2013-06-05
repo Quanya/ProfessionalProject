@@ -102,7 +102,7 @@ $sumrow2 = mysql_fetch_array($sumid2);
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
 <title>Blog Design</title>
-<link rel="stylesheet" type="text/css" href="style1-product.css" />
+<link rel="stylesheet" type="text/css" href="style1.css" />
 
        
 
@@ -204,58 +204,185 @@ $(function () {
 });
 		</script>
 		
-	
-	<!--不同品牌在每个年份占的比例-->
-     <link type="text/css" rel="stylesheet" href="ex.css?3.2"/> 
-    <link type="text/css" rel="stylesheet" href="css-provis/jquery-ui-1.8rc3.custom.css"/> 
-    <script type="text/javascript" src="js-provis/protovis-r3.2.js"></script> 
-    <script type="text/javascript" src="js-provis/jquery-1.4.2.min.js"></script> 
-    <script type="text/javascript" src="js-provis/jquery-ui-1.8rc3.custom.min.js"></script> 
-    <script type="text/javascript" src="js-provis/centroid.js"></script> 
-    <script type="text/javascript" src="js-provis/us_lowres.js"></script> 
-    <script type="text/javascript" src="js-provis/us_stats.js"></script> 
-    <script type="text/javascript" src="js-provis/us_borders.js"></script> 
-    <style type="text/css"> 
- 
-#fig {
-  width: 800px;
-  height: 500px;
-  margin-top: 30px;
+	<!--  图片轮放 -->
+
+<style type="text/css" media="screen">
+<!--
+body { font: 1em "Trebuchet MS", verdana, arial, sans-serif; font-size: 100%; }
+input, textarea { font-family: Arial; font-size: 125%; padding: 7px; }
+label { display: block; } 
+
+.infiniteCarousel {
+  width: 395px;
+  position: relative;
+  margin-top: 25px;
+  margin-left: 145px;
 }
- 
-#container {
-  height: 10px;
-}
- 
-#yearSlider {
+
+.infiniteCarousel .wrapper {
+  width: 315px; /* .infiniteCarousel width - (.wrapper margin-left + .wrapper margin-right) */
+  overflow: auto;
+  min-height: 10em;
+  margin: 0 40px;
   position: absolute;
-  left: 100px;
-  right: 90px;
-  margin-top: 3px;
+  top: 0;
 }
- 
-#yearLabel {
+
+.infiniteCarousel ul a img {
+  border: 5px solid #000;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+
+.infiniteCarousel .wrapper ul {
+  width: 9999px;
+  list-style-image:none;
+  list-style-position:outside;
+  list-style-type:none;
+  margin:0;
+  padding:0;
   position: absolute;
-  left: 0px;
+  top: 0;
+}
+
+.infiniteCarousel ul li {
+  display:block;
+  float:left;
+  padding: 10px;
+  height: 85px;
   width: 85px;
-  text-align: right;
 }
- 
-#play {
+
+.infiniteCarousel ul li a img {
+  display:block;
+}
+
+.infiniteCarousel .arrow {
+  display: block;
+  height: 36px;
+  width: 37px;
+  background: url(arrow.png) no-repeat 0 0;
+  text-indent: -999px;
   position: absolute;
-  right: 50px;
+  top: 37px;
   cursor: pointer;
 }
- 
-    </style> 	
-<!-- end-->	
+
+.infiniteCarousel .forward {
+  background-position: 0 0;
+  right: 0;
+}
+
+.infiniteCarousel .back {
+  background-position: 0 -72px;
+  left: 0;
+}
+
+.infiniteCarousel .forward:hover {
+  background-position: 0 -36px;
+}
+
+.infiniteCarousel .back:hover {
+  background-position: 0 -108px;
+}
+
+
+
+-->
+</style>
+
+<script src="jquery.min.js"></script>
+
+
+<script type="text/javascript">
+
+$.fn.infiniteCarousel = function () {
+
+    function repeat(str, num) {
+        return new Array( num + 1 ).join( str );
+    }
+  
+    return this.each(function () {
+        var $wrapper = $('> div', this).css('overflow', 'hidden'),
+            $slider = $wrapper.find('> ul'),
+            $items = $slider.find('> li'),
+            $single = $items.filter(':first'),
+            
+            singleWidth = $single.outerWidth(), 
+            visible = Math.ceil($wrapper.innerWidth() / singleWidth), // note: doesn't include padding or border
+            currentPage = 1,
+            pages = Math.ceil($items.length / visible);            
+
+
+        // 1. Pad so that 'visible' number will always be seen, otherwise create empty items
+        if (($items.length % visible) != 0) {
+            $slider.append(repeat('<li class="empty" />', visible - ($items.length % visible)));
+            $items = $slider.find('> li');
+        }
+
+        // 2. Top and tail the list with 'visible' number of items, top has the last section, and tail has the first
+        $items.filter(':first').before($items.slice(- visible).clone().addClass('cloned'));
+        $items.filter(':last').after($items.slice(0, visible).clone().addClass('cloned'));
+        $items = $slider.find('> li'); // reselect
+        
+        // 3. Set the left position to the first 'real' item
+        $wrapper.scrollLeft(singleWidth * visible);
+        
+        // 4. paging function
+        function gotoPage(page) {
+            var dir = page < currentPage ? -1 : 1,
+                n = Math.abs(currentPage - page),
+                left = singleWidth * dir * visible * n;
+            
+            $wrapper.filter(':not(:animated)').animate({
+                scrollLeft : '+=' + left
+            }, 500, function () {
+                if (page == 0) {
+                    $wrapper.scrollLeft(singleWidth * visible * pages);
+                    page = pages;
+                } else if (page > pages) {
+                    $wrapper.scrollLeft(singleWidth * visible);
+                    // reset back to start position
+                    page = 1;
+                } 
+
+                currentPage = page;
+            });                
+            
+            return false;
+        }
+        
+        $wrapper.after('<a class="arrow back">&lt;</a><a class="arrow forward">&gt;</a>');
+        
+        // 5. Bind to the forward and back buttons
+        $('a.back', this).click(function () {
+            return gotoPage(currentPage - 1);                
+        });
+        
+        $('a.forward', this).click(function () {
+            return gotoPage(currentPage + 1);
+        });
+        
+        // create a public interface to move to a specific page
+        $(this).bind('goto', function (event, page) {
+            gotoPage(page);
+        });
+    });  
+};
+
+$(document).ready(function () {
+  $('.infiniteCarousel').infiniteCarousel();
+});
+</script>	
+		
+	
 		
 		
 </head>
 
 <body>
 	<div id="header">
-		<span class="logo"></span>																																																											<div style="position:absolute;top:1px;left:1px;height:0px;width:0px;overflow:hidden"><h1><a href="sc.chinaz.com">best free templates</a></h1></div>
+		<span class="logo">blog about web design</span>																																																											<div style="position:absolute;top:1px;left:1px;height:0px;width:0px;overflow:hidden"><h1><a href="sc.chinaz.com">best free templates</a></h1></div>
 		<ul id="menu">
 			<li><a href="index.html"><img src="images/but1.gif" alt="" width="64" height="42" /></a></li>
 			<li><a href="index2.html"><img src="images/but2.gif" alt="" width="108" height="42" /></a></li>
@@ -281,220 +408,31 @@ $(function () {
 				  <script src="./js/highcharts/highcharts.js"></script>
                     <script src="./js/highcharts/modules/exporting.js"></script>
 				
-				      <div id="container1" style="min-width: 400px; height: 500px; margin: 0 auto;margin-bottom=30px;"></div>
+				      <div id="container1" style="min-width: 400px; height: 500px; margin: 0 auto"></div>
 				
-				<!--不同品牌在每个年份占的比例-->
+				<!-- 图片轮放 -->
 				
-				<div id="center"><div id="fig"> 
-    <div id="container"> 
-      <b id="yearLabel">Year:</b
-      ><div id="yearSlider"></div
-      ><img id="play" src="play.png" alt="Play" onclick="playClick()"> 
-    </div> 
-    <script type="text/javascript+protovis"> 
- 
-$(yearSlider).slider({
-  min: us_stats.minYear,
-  max: us_stats.maxYear,
-  value: us_stats.maxYear,
-  slide: function(e, ui) {
-    year = ui.value;
-    updateYear();
-    vis.render();
-  }
-});
- 
-var year = 2008;
- 
-us_lowres.forEach(function(c) {
-  c.code = c.code.toUpperCase();
-  c.center = centroid(c.borders[0]);
-});
- 
-var i = 0,
-    w = 810,
-    h = 400,
-    mapMargin = 30;
- 
-var scale = pv.Geo.scale()
-    .domain({lng: -128, lat: 24}, {lng: -64, lat: 50})
-    .range({x: mapMargin, y: mapMargin}, {x: w-mapMargin, y: h-mapMargin});
- 
-var legendMargin = 20,
-    ease = null,
-    yearsMargin = 100;
- 
-var yearsScale = pv.Scale.linear()
-    .domain(us_stats.minYear, us_stats.maxYear)
-    .range(yearsMargin + 2, w - yearsMargin);
- 
-var legendScale = pv.Scale.linear()
-    .domain(14, 35)
-    .range(legendMargin, w - legendMargin);
- 
-var col = function(v) {
-  if (v < 17) return "#008038";
-  if (v < 20) return "#A3D396";
-  if (v < 23) return "#FDD2AA";
-  if (v < 26) return "#F7976B";
-  if (v < 29) return "#F26123";
-  if (v < 32) return "#E12816";
-  /* else */ return "#B7161E";
-};
- 
-var numToRad = function(n) {
-  return Math.sqrt(n)/45;
-};
- 
-var nodes = [],
-    codeToNode = [],
-    links = [];
- 
-us_lowres.forEach(function(s) {
-  if (us_stats[s.code]) {
-    var x = scale(s.center).x,
-        y = scale(s.center).y,
-        numObese = us_stats[s.code].pop[us_stats.yearIdx(year)]*us_stats[s.code].obese[us_stats.yearIdx(year)]/100,
-        n = {x: x, y: y, p: {x: x, y: y}, r: numToRad(numObese), code:s.code};
-    nodes.push(n);
-    codeToNode[s.code] = n;
-  }
-});
- 
-us_lowres.forEach(function(s) {
-  if (us_stats[s.code]) {
-    var borders = us_borders[s.code];
-    borders.forEach(function(b) {
-      if (codeToNode[s.code] && codeToNode[b] && s.code < b) {
-        var nodeA = codeToNode[s.code];
-        var nodeB = codeToNode[b];
-        links.push({sourceNode:nodeA, targetNode:nodeB, length:(nodeA.r + nodeB.r + 2)});
-      }
-    });
-  }
-});
- 
-function updateYear() {
-  nodes.forEach(function(n) n.r = numToRad(us_stats[n.code].pop[us_stats.yearIdx(year)]*us_stats[n.code].obese[us_stats.yearIdx(year)]/100));
-  links.forEach(function(l) l.length = (l.sourceNode.r + l.targetNode.r + 2));
-  i = 0;
-  var stepSome = setInterval(function() {
-    if (i++ > 10) clearInterval(stepSome);
-    sim.step();
-    vis.render();
-  }, 20);
-}
- 
-var timer = undefined;
-function playClick() {
-  if (timer) {
-    stop();
-  } else {
-    if (year == us_stats.maxYear) year = us_stats.minYear;
-    $(yearSlider).slider('value', year);
-    $(play).attr("src", 'stop.png');
-    updateYear();
-    vis.render();
-    timer = setInterval(function() {
-      year++;
-      if (year >= us_stats.maxYear) stop();
-      $(yearSlider).slider('value', year);
-      updateYear();
-      vis.render();
-    }, 900);
-  }
-}
- 
-// Stop the animation
-function stop() {
-  clearInterval(timer);
-  timer = undefined;
-  $(play).attr("src", 'play.png');
-}
- 
-var collisionConstraint = pv.Constraint.collision(function(d) d.r + 1),
-    positionConstraint = pv.Constraint.position(function(d) d.p),
-    linkConstraint = pv.Force.spring(100).links(links);
- 
-var sim = pv.simulation(nodes)
-    .constraint(collisionConstraint)
-    .constraint(positionConstraint)
-    .constraint(linkConstraint)
-    .force(pv.Force.drag());
- 
-var vis = new pv.Panel()
-    .width(w)
-    .height(h)
-    .top(50)
-    .bottom(30);
- 
-// Add the ticks and labels for the year slider
-vis.add(pv.Rule)
-     .data(pv.range(us_stats.minYear, us_stats.maxYear + .1))
-     .left(yearsScale)
-     .height(4)
-     .top(-40)
-   .anchor("bottom").add(pv.Label);
- 
-vis.add(pv.Dot)
-    .data(nodes)
-    .left(function(d) d.x)
-    .top(function(d) d.y)
-    .radius(function(d) d.r)
-    .fillStyle(function(d) col(us_stats[d.code].obese[us_stats.yearIdx(year)]))
-    .strokeStyle(null)
-    .title(function(d) us_stats[d.code].name + ": " + us_stats[d.code].obese[us_stats.yearIdx(year)] + "%")
-   .add(pv.Label)
-    .text(function(d) d.code)
-    .textStyle("#fee")
-    .font(function(d) "bold " + (4*Math.log(d.r)).toFixed(0) + "px sans-serif")
-    .textAlign("center")
-    .textBaseline("middle");
- 
-vis.add(pv.Dot)
-    .data([
-        {v: 10000000, l: "10M"},
-        {v: 1000000, l: "1M"},
-        {v: 5000000, l: "5M"},
-        {v: 100000, l: "100K"}
-      ])
-    .fillStyle(null)
-    .strokeStyle("#555")
-    .left(150)
-    .bottom(-30)
-    .radius(function(d) numToRad(d.v))
-  .anchor("top").add(pv.Label)
-    .text(function(d) d.l)
- 
-// Add the color bars for the color legend
-vis.add(pv.Bar)
-    .data(pv.range(14,32.1,3))
-    .bottom(function(d) this.index * 15 - 28)
-    .height(10)
-    .width(10)
-    .left(5)
-     .fillStyle(function(d) col(14 + 3 * this.index))
-    .lineWidth(null)
-  .anchor("right").add(pv.Label)
-    .textAlign("left")
-    .text(function(d) d + " - " + (d+3) + "%");
- 
-ease = setInterval(function() {
-  if (i++ > 140) {
-    clearInterval(ease);
-    ease = null;
-  }
-  sim.step();
-  positionConstraint.alpha(Math.pow(.7, i + 2) + .03);
-  linkConstraint.damping(Math.pow(.7, i + 2) + .03);
-  vis.render();
-}, 42);
- 
-    </script> 
-  </div></div>
-</div>
-
-<!--end-->
+   <div class="infiniteCarousel">
+      <div class="wrapper">
+        <ul>
+          <li><a href="http://www.flickr.com/photos/remysharp/3047035327/" title="Tall Glow"><img src="http://farm4.static.flickr.com/3011/3047035327_ca12fb2397_s.jpg" height="75" width="75" alt="Tall Glow" /></a></li>
+          <li><a href="http://www.flickr.com/photos/remysharp/3047872076/" title="Wet Cab"><img src="http://farm4.static.flickr.com/3184/3047872076_61a511a04b_s.jpg" height="75" width="75" alt="Wet Cab" /></a></li>
+          <li><a href="http://www.flickr.com/photos/remysharp/3047871878/" title="Rockefella"><img src="http://farm4.static.flickr.com/3048/3047871878_84bfacbd35_s.jpg" height="75" width="75" alt="Rockefella" /></a></li>
+          <li><a href="http://www.flickr.com/photos/remysharp/3047034929/" title="Chrysler Reflect"><img src="http://farm4.static.flickr.com/3220/3047034929_97eaf50ea3_s.jpg" height="75" width="75" alt="Chrysler Reflect" /></a></li>
+          <li><a href="http://www.flickr.com/photos/remysharp/3047871624/" title="Chrysler Up"><img src="http://farm4.static.flickr.com/3164/3047871624_2cacca4684_s.jpg" height="75" width="75" alt="Chrysler Up" /></a></li>
+          <li><a href="http://www.flickr.com/photos/remysharp/3047034661/" title="Time Square Awe"><img src="http://farm4.static.flickr.com/3212/3047034661_f96548965e_s.jpg" height="75" width="75" alt="Time Square Awe" /></a></li>
+          <li><a href="http://www.flickr.com/photos/remysharp/3047034531/" title="Wonky Buildings"><img src="http://farm4.static.flickr.com/3022/3047034531_9c74359401_s.jpg" height="75" width="75" alt="Wonky Buildings" /></a></li>
+          <li><a href="http://www.flickr.com/photos/remysharp/3047034451/" title="Leaves of Fall"><img src="http://farm4.static.flickr.com/3199/3047034451_121c93386f_s.jpg" height="75" width="75" alt="Leaves of Fall" /></a></li>
+        </ul>        
+      </div>
+    </div>
+				
+				
+			
+	
+				
+				
+				</div>
 			
 			</div>
 		</div>
@@ -503,7 +441,7 @@ ease = setInterval(function() {
 				<input type="text" value="Search"> <a href="sc.chinaz.com"><img src="images/go.gif" alt="" width="26" height="26" /></a>
 			</div>
 			<div class="list">
-				<img src="images/title1.gif" alt="" width="87" height="36" />
+				<img src="images/title1.gif" alt="" width="150" height="36" />
 				
 		    <div class="col-1-2">
              <ul class="demo1">

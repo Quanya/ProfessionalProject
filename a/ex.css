@@ -1,9 +1,9 @@
 body {
-  margin: 0;
-  display: table;
-  height: 100%;
-  width: 100%;
-  font: 14px/134% Helvetica Neue, sans-serif;
+  .margin: 0;
+  .display: table;
+  .height: 100%;
+  .width: 100%;
+  .font: 14px/134% Helvetica Neue, sans-serif;
 }
 
 #center {
@@ -14,4 +14,10 @@ body {
 #fig {
   position: relative;
   margin: auto;
+}
+.post {
+padding: 0 0 35px 0;
+overflow: hidden;
+.height: 800px;
+float: left;
 }

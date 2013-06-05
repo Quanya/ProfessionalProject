@@ -140,7 +140,7 @@ padding:20px 0 0 0;
 float:left;
 margin:0 0 15px 0;
 / margin:0;
-width: 700px;
+.width: 700px;
 }
 .post .description img{
 float:left;
@@ -199,7 +199,7 @@ margin:50px 0 0 2px
 .list{
 padding:0 0 15px 35px;
 float: right;
-width: 200px;
+width: 120px;
 }
 .list ul{
 width:290px;
