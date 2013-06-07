@@ -381,9 +381,50 @@ height:40px;
 }
 
 
+.top1{
+font: 50px/84px 'Playball', cursive;
+color: #ee5e3d;
+}
+.top11{
+font: 30px/64px 'Playball', cursive;
+color: #ee5e3d;
+display:block;
+}
+.top2{
+font-size: 40px;
+color: #67a1b1;
+font-family: 'Playball', cursive;
 
+display: inline-block;
+padding: 0 0 0 45px;
+}
+.top21{
+font-size: 30px;
+color: #67a1b1;
+font-family: 'Playball', cursive;
 
+.display: inline-block;
+.padding: 0 0 0 45px;
+display:block;
+}
 
+.top3{
+font-size: 30px;
+color: #ffb900;
+font-family: 'Playball', cursive;
 
+display: inline-block;
+padding: 0 0 0 45px;
+}
+.top31{
+font-size: 25px;
+color: #ffb900;
+font-family: 'Playball', cursive;
+
+.display: inline-block;
+.padding: 0 0 0 45px;
+display:block;
+margin-bottom:10px;
+}
 
 

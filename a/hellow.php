@@ -117,9 +117,9 @@ while($row = mysql_fetch_array($result)){
 				    <div class="column">
 					 
 				       <div id="div1">					  
-					    <li><?php echo $c[0];?></li>
-						<li><?php echo $c[1];?></li>
-					    <li><?php echo $c[2];?></li>
+					    <span class="top11"><?php echo $c[0];?></span>
+						<span class="top21"><?php echo $c[1];?></span>
+					    <span class="top31"><?php echo $c[2];?></span>
 					  <!--Ç°ÈýÃû-->
 	                    <a href="" class="red"><?php echo $c[0];?></a>
 	                    <a href="" class="red"><?php echo $c[1];?></a>

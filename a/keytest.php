@@ -41,9 +41,9 @@
 				    <div class="column">
 					 
 				       <div id="div1">					  
-					    <li>Top1</li>
-						<li>Top2</li>
-					    <li>Yop3</li>
+					    <span class="top1">Top1</span>
+						<span class="top2">Top2</span>
+					    <span class="top3">Top3</span>
 					  <!--Ç°ÈýÃû-->
 	                    <a href="" class="red">First</a>
 	                    <a href="" class="red">Second</a>
