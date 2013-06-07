@@ -8,5 +8,11 @@
   sales_mapguang.php+sales_mapmeng.php+sales_mapyi.php
   
 关键字
- keyword.php
+ keytest.php+hellow.php
+ 
+推荐
+ 选择 价格 适合人群 地点
+    根据价格+适合人群确定范围，根据sumsale排序，地点加进去考虑。
+//相片
     
+	
