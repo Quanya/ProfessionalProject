@@ -78,7 +78,7 @@ while($row = mysql_fetch_array($result)){
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
 <title>Blog Design</title>
-<link rel="stylesheet" type="text/css" href="style1.css" />
+<link rel="stylesheet" type="text/css" href="style1-keyword.css" />
 
      <!-- keyword按钮   --> 
         <link rel="stylesheet" type="text/css" href="css-key/default.css" />
