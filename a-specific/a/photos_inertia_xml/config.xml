@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<polaroids>
+	<color>0x0099CC</color>
+	<title>Milk Types</title>
+	<music>music.mp3</music>
+	<contact>contact@contact.com</contact>
+	<rightClickMenu>Design by YoU</rightClickMenu>
+	<galleries>
+		<gallery dir="photos/other/">Inner Mongolia Meng Niu Dairy (Group)</gallery>
+		<gallery dir="photos/buildings/">INNER　MONGOLIA　YILI　INDUSTRIAL　GROUP　CO.，LTD</gallery>
+		<gallery dir="photos/vehicles/">Guangming</gallery>
+		</galleries>
+</polaroids>
+
+
