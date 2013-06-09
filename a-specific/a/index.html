@@ -1,0 +1,37 @@
+<html lang="en" class=" js csstransforms3d csstransitions" style=""><head>
+		
+		
+		<link rel="stylesheet" type="text/css" href="css-com/component.css">
+		<script src="js-com/modernizr.custom.js"></script>
+	</head>
+	<body style="zoom: 1;">
+		<div class="container">	
+			
+			
+			
+			<div class="main">
+				<div id="fc-slideshow" class="fc-slideshow">
+					<ul class="fc-slides">
+						<li style="display: none;"><img src="images/1.jpg"><h3>Hot</h3></li>
+						<li style="display: none;"><img src="images/2.jpg"><h3>Cold</h3></li>
+						<li style="display: list-item;"><img src="images/3.jpg"><h3>Light</h3></li>
+						<li style="display: none;"><img src="images/4.jpg"><h3>Dark</h3></li>
+						<li style="display: none;"><img src="images/5.jpg"><h3>Soft</h3></li>
+						<li style="display: none;"><img src="images/6.jpg"><h3>Hard</h3></li>
+						<li style="display: none;"><img src="images/7.jpg"><h3>Smooth</h3></li>
+						<li style="display: none;"><img src="images/8.jpg"><h3>Rough</h3></li>
+					</ul>
+				<nav><div class="fc-left"><span></span><span></span><span></span><i class="icon-arrow-left"></i></div><div class="fc-right"><span></span><span></span><span></span><i class="icon-arrow-right"></i></div></nav><div class="fc-flip" style="-webkit-transition: none; -webkit-transform: none; display: none;"><div class="fc-front"><div><img src="images/2.jpg"><h3>Cold</h3></div><div class="fc-overlay-light" style="-webkit-transition: opacity 538.4615384615385ms; opacity: 1;"></div></div><div class="fc-back" style="-webkit-transform: rotate3d(0, 1, 0, 180deg);"><div><img src="images/3.jpg"><h3>Light</h3></div><div class="fc-overlay-dark" style="opacity: 0; -webkit-transition: opacity 538.4615384615385ms;"></div></div></div></div>
+			</div>
+		</div><!-- /container -->
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+		<script src="js-com/jquery.flipshow.js"></script>
+		<script>
+			$( function() {
+				
+				$( '#fc-slideshow' ).flipshow();
+
+			} );
+		</script>
+	
+</body></html>

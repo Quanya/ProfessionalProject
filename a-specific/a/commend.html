@@ -1,0 +1,61 @@
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>commend</title>
+<script type="text/javascript" src="js-com/jquery.js"></script>
+<script type="text/javascript" src="js-com/nicejforms.js"></script>
+<style type="text/css" media="screen">
+@import url(css-com/niceforms-green.css);
+</style>
+</head>
+<body>
+<div id="container">
+  <h1 style="margin-bottom:30px; color:#99cc33;">Commend</h1>
+  <form action="vars.php" method="POST" class="niceform">  
+    <select size="1" id="mySelect2" name="mySelect2" class="width_160">
+      <option value="Test area no.2">Test area no.2</option>
+      <option value="Another test">Another test</option>
+      <option selected="selected" value="And another one">And another one</option>
+      <option value="And yet another one">And yet another one</option>
+      <option value="One last option for me">One last option for me</option>
+    </select>
+    <br />
+    <input type="radio" name="radioSet" id="option1" value="foo" checked="checked" />
+    <label for="option1">蒙牛</label>
+    <br />
+    <input type="radio" name="radioSet" id="option2" value="bar" />
+    <label for="option2">伊利</label>
+    <br />
+    <input type="radio" name="radioSet" id="option3" value="another option" />
+    <label for="option3">光明</label>
+    <br />
+ 
+     
+    <br />
+    <label for="textinput">Min(Price):</label>
+    <br />
+    <input type="text" id="textinput" name="textinput" size="15" />
+    <br />
+    <label for="passwordinput">Max(Price):</label>
+    <br />
+    <input type="password" id="passwordinput" name="passwordinput" size="15" />
+    <br />
+    
+    <br />
+    <input type="submit" class="button-primary" value="OK!" />
+  </form>
+  
+</div>
+
+<div style="width:550px;margin:20px auto;">
+<p><strong><a href="http://js.mobanwang.com"></a></strong> </p>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$.NiceJForms.build({
+			imagesPath:"css-com/images/greentheme/"
+		})
+	});
+</script>
+</body>
+</html>

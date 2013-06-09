@@ -1,20 +1,26 @@
-三个品牌年销售量 total_saleguang.php+total_salemeng.php+total_saleyi.php
+三个品牌年销售量 total_saleguang.php+total_salemeng.php+total_saleyi.php          //基本完成
   品牌销售量对比 total-sale-product01.php
   
-根据数据库内容求出的半年来销售量+好评
+根据数据库内容求出的半年来销售量+好评                                            //好评没用弄上去+表格不知道提填什么
   detail-sale.php
   
-地图：
+地图：                                                                          //基本完成
   sales_mapguang.php+sales_mapmeng.php+sales_mapyi.php
   
-关键字
+关键字                           //基本完成，能改中文字体样式就更好了
  keytest.php+hellow.php
  
-推荐
+推荐                            //进行中
  选择 价格 适合人群 地点
     根据价格+适合人群确定范围，根据sumsale排序，地点加进去考虑。
-//相片
-    
-页面6 好评分析
 	
+  recommend.php  表格样子修改下。。。不知道css为什么没有用！
+  rec-ans.php
 	
+各商品信息	    //进行中
+
+
+任务分配：
+  彤彤： 半年来销售量+好评  界面
+  小鸿： 各商品信息         界面 
+  戴琳： 推荐               界面
