@@ -56,7 +56,7 @@ $data1 = json_encode($brrs);
 /*************读取光明数据*****************/
 $result1 = mysql_query("SELECT * FROM product_sale WHERE product='g'");
 while($row = mysql_fetch_array($result1)){
-	if($row['id']==41){
+	if($row['id']==28){
 		$crr1[] = array(
 			"name" =>  $row['id'],
 			"y" => intval($row['sale']),

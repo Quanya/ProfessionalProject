@@ -91,7 +91,7 @@
       <option value="0">不限</option>
     </select>
     <br />
-	<br />
+	<!--<br />
     <input type="radio" name="radioSet" id="option1" value="26" checked="checked" />
     <label for="option1">蒙牛</label>
     <br />
@@ -101,6 +101,9 @@
     <input type="radio" name="radioSet" id="option3" value="29" />
     <label for="option3">光明</label>
     <br />
+	<input type="radio" name="radioSet" id="option3" value="30" />
+    <label for="option3">不限</label>
+    <br />-->
  
      
     <br />
@@ -111,6 +114,10 @@
     <label for="passwordinput">Max(Price):</label>
     <br />
     <input type="text" id="textinput" name="textinput2" size="15" />
+    <br />
+	<label for="passwordinput">Location:</label>
+    <br />
+    <input type="text" id="textinput" name="textinput3" size="15" />
     <br />
     
     <br />
